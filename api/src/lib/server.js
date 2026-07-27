@@ -10,9 +10,6 @@ export const startServer = () => {
 
     try {
 
-        console.log("Testing docker images...");
-
-        console.log(`Port from .env = ${process.env.PORT}`)
 
         httpServer.listen(port, () => {
             console.log(`Server is running on http://localhost:${port}`);
