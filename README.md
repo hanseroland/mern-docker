@@ -75,15 +75,9 @@ Dans package.json on peut configurer les commandes docker pour:
 * /usr/src/app    → dossier du projet dans le conteneur
 Cela signifie que Docker relie ces deux dossiers.
 
-          Bind Mount
 
-Ton ordinateur                Conteneur Docker
-┌──────────────────┐      ┌─────────────────────┐
-│ ./               │ ───► │ /usr/src/app        │
-│ ├── src          │      │ ├── src             │
-│ ├── package.json │      │ ├── package.json    │
-│ └── index.js     │      │ └── index.js        │
-└──────────────────┘      └─────────────────────┘
+```
+            Bind Mount
 
 Mon ordinateur                Conteneur Docker
 ___________________            __________________
@@ -94,6 +88,7 @@ ___________________            __________________
 | |___index.js    |            | |__index.js    |
 |_________________|            |________________|
 
+```
 
 Cette commande lance un conteneur nommé api à partir de l'image my-app/express-api:latest-dev. Grâce au volume -v ./:/usr/src/app, le dossier courant de l'ordinateur est partagé avec le dossier /usr/src/app du conteneur. Le conteneur travaille donc directement sur les fichiers du projet local, ce qui évite de reconstruire l'image après chaque modification et permet le hot reloading pendant le développement.
 
