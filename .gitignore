@@ -6,6 +6,8 @@ node_modules/
 
 # Ignorer les fichiers d'environnement
 .env
+api/.env
+api/.env.development
 
 # Ignorer les fichiers de build
 build/
