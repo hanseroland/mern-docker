@@ -1,4 +1,12 @@
 services:
+    mongo:
+        container_name: my-app-db
+        image: mongo:latest
+        restart: unless-stopped
+        ports:
+            - "27018:27017"
+
+
     api:
         container_name: api
         build: ./api
@@ -7,3 +15,4 @@ services:
             - "3000:3000"
         volumes:
             - ./api:/usr/src/app
+    
