@@ -134,21 +134,7 @@ Sans Compose :
     - Charlie utilise une autre version de PostgreSQL.
     - David oublie une variable d'environnement.
 
-Résultat : "Chez moi ça marche, chez toi non."
-
-Avec Docker Compose :
-
-Tout le monde utilise exactement le même fichier :
-Imaginons une équipe de 5 développeurs.
-
-Sans Compose :
-
-    - Alice lance PostgreSQL sur le port 5432.
-    - Bob oublie un volume.
-    - Charlie utilise une autre version de PostgreSQL.
-    - David oublie une variable d'environnement.
-
-Résultat : "Chez moi ça marche, chez toi non."
+Résultat : "Chez moi ça marche, chez toi non." 
 
 **Avec Docker Compose :**
 
