@@ -42,6 +42,7 @@ Il signifie :"Utilise le dossier courant comme source."
 * **docker start**  Démarre un conteneur déjà existant.
 * **docker container prune** Supprimer tous les containers eteitnts.
 * **docker image prune** Supprimer tous les images.
+* **docker network ls** Elle affiche donc tous les réseaux Docker disponibles sur ta machine.
 
 
 ## NB:
@@ -92,3 +93,95 @@ ___________________            __________________
 
 Cette commande lance un conteneur nommé api à partir de l'image my-app/express-api:latest-dev. Grâce au volume -v ./:/usr/src/app, le dossier courant de l'ordinateur est partagé avec le dossier /usr/src/app du conteneur. Le conteneur travaille donc directement sur les fichiers du projet local, ce qui évite de reconstruire l'image après chaque modification et permet le hot reloading pendant le développement.
 
+## Docker Networks
+Quand on lance un conteneur on y accède pas directement en localhost via le port définit souvent 3000 pour le backend avec NodeJs. Pour cela il faut faire !
+* **docker run -p <<host>:<container>>**
+* **docker run -p 3000:3000 my-app/express-api:latest-dev**
+
+## Docker Compose
+Docker Compose est un outil qui permet de définir et lancer plusieurs conteneurs Docker à partir d'un seul fichier de configuration (compose.yaml ou docker-compose.yml)
+Au lieu d'exécuter plusieurs longues commandes docker run, on décrit toute  notre architecture dans un fichier YAML.
+
+* ### Pourquoi est-ce plus simple ?
+
+Parce que toute la configuration est centralisée.
+
+Au lieu de retenir plusieurs commandes :
+```
+docker run ...
+docker run ...
+docker run ...
+```
+On exécute simplement :
+
+```
+docker compose up
+```
+
+Pour arrêter :
+
+```
+docker compose down
+```
+
+* ### Pourquoi est-ce plus cohérent (consistent) pour une équipe ?
+Imaginons une équipe de 5 développeurs.
+
+Sans Compose :
+
+    - Alice lance PostgreSQL sur le port 5432.
+    - Bob oublie un volume.
+    - Charlie utilise une autre version de PostgreSQL.
+    - David oublie une variable d'environnement.
+
+Résultat : "Chez moi ça marche, chez toi non."
+
+Avec Docker Compose :
+
+Tout le monde utilise exactement le même fichier :
+Imaginons une équipe de 5 développeurs.
+
+Sans Compose :
+
+    - Alice lance PostgreSQL sur le port 5432.
+    - Bob oublie un volume.
+    - Charlie utilise une autre version de PostgreSQL.
+    - David oublie une variable d'environnement.
+
+Résultat : "Chez moi ça marche, chez toi non."
+
+**Avec Docker Compose :**
+
+Tout le monde utilise exactement le même fichier :
+
+```
+services:
+  postgres:
+    image: postgres:17
+```
+
+* ### Pourquoi est-ce flexible ?
+Parce que modifier l'architecture devient très simple.
+
+Aujourd'hui :
+```
+React
+Express
+PostgreSQL
+```
+
+Demain si on ajoute Redis.
+Il suffit d'ajouter :
+
+```
+redis:
+  image: redis:8
+```
+
+Puis :
+
+```
+docker compose up
+```
+
+Docker Compose permet de décrire toute une application composée de plusieurs conteneurs dans un seul fichier. Il simplifie le démarrage et l'arrêt de l'environnement (docker compose up / down), garantit que toute l'équipe travaille avec la même configuration et facilite l'évolution de l'architecture en ajoutant ou modifiant des services sans avoir à réécrire de longues commandes docker run. C'est pourquoi il est devenu l'outil standard pour développer des applications composées de plusieurs services.
