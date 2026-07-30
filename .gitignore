@@ -6,6 +6,7 @@ node_modules/
 
 # Ignorer les fichiers d'environnement
 .env
+.env.development
 api/.env
 api/.env.development
 
