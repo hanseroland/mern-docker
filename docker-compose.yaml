@@ -6,7 +6,8 @@ services:
         env_file: .env.development
         ports:
             - "27018:27017"
-
+        volumes:
+            - ./data:/data/db
 
     api:
         container_name: api
