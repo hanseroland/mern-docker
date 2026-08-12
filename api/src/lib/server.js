@@ -11,7 +11,7 @@ export const startServer = async () => {
 
     setupRoutes(app);
 
-     await initializeApp(app);
+     await initializeApp(app,config);
 
 
     try {
