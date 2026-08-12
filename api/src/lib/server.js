@@ -1,19 +1,22 @@
 import express from 'express';
 import config from './config.js';
 import { setupRoutes } from './setupRoutes.js';
+import { initializeApp } from './initializers/index.js';
 
 
-export const startServer = () => {
+export const startServer = async () => {
 
-    const httpServer = express();
+    const app = express();
     const port = config.port;
 
-    setupRoutes(httpServer);
+    setupRoutes(app);
+
+     await initializeApp(app);
 
 
     try {
 
-        httpServer.listen(port, () => {
+        app.listen(port, () => {
             console.log(`Server is running on http://localhost:${port}`);
         });
 
