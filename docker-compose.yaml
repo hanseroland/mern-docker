@@ -8,6 +8,8 @@ services:
             - "27018:27017"
         volumes:
             - ./data:/data/db
+        networks:
+            - my-app-network
 
     api:
         container_name: api
@@ -17,4 +19,12 @@ services:
             - "3000:3000"
         volumes:
             - ./api:/usr/src/app
+        networks:
+            - my-app-network
+        depends_on:
+            - mongo
+
+networks:
+     my-app-network:
+       driver: bridge
     
