@@ -1,6 +1,5 @@
 import express from 'express';
 import config from './config.js';
-import { setupRoutes } from './setupRoutes.js';
 import { initializeApp } from './initializers/index.js';
 
 
@@ -9,7 +8,6 @@ export const startServer = async () => {
     const app = express();
     const port = config.port;
 
-    setupRoutes(app);
 
      await initializeApp(app,config);
 
